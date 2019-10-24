@@ -1,3 +1,3 @@
-## 0.0.1
+## 0.1.0
 
-* TODO: Describe initial release.
+* A flutter plugin for h5pay(support WeChat and Alipay).
