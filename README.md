@@ -13,7 +13,7 @@ Add `flutter_h5pay` as a [dependency in your pubspec.yaml file](https://flutter.
 For Example
 ```
 dependencies:
-  plugin1:
+  flutter_h5pay:
     git:
       url: https://github.com/shingohu/flutter_h5pay.git
 ```
