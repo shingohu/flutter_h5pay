@@ -18,9 +18,17 @@ enum PayStatus {
 }
 
 enum JumpPayResult {
+  ///仅仅表示跳转成功,支付状态需要自己查询服务器
   SUCCESS,
-  TIMEOUT, //有可能链接参数等不正确
-  FAIL, //有可能没有安装微信或者支付宝的app
+
+  ///1 可能不是支付链接或者参数不正确
+  ///2 微信支付链接超时,链接失效
+  ///3 IOS上第一次需要授权,不点击的情况下不会触发跳转成功或者失败
+  TIMEOUT,
+
+  ///有可能没有安装微信或者支付宝的app
+  ///IOS上可能点了不允许打开微信或者支付宝
+  FAIL,
 }
 
 abstract class H5PayController {
@@ -97,6 +105,7 @@ class _H5PayWidgetState extends State<H5PayWidget> implements H5PayController {
         Offstage(
           offstage: true,
           child: WebView(
+            javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: _onWebViewCreated,
             navigationDelegate: _navigationDelegate,
           ),
@@ -137,14 +146,22 @@ class _H5PayWidgetState extends State<H5PayWidget> implements H5PayController {
 
       if (_isDispose || _payStatus != PayStatus.LOADING) {
       } else {
-        launch(url).then((success) {
-          _payStatus = success ? PayStatus.SUCCESS : PayStatus.FAIL;
-          if (success) {
-            _jumpPayResultCallback?.call(JumpPayResult.SUCCESS);
-          } else {
-            _jumpPayResultCallback?.call(JumpPayResult.FAIL);
-          }
-        });
+        if (Platform.isIOS) {
+          launch(url).then((can) {
+            _payStatus = can ? PayStatus.SUCCESS : PayStatus.FAIL;
+            _jumpPayResultCallback
+                ?.call(can ? JumpPayResult.SUCCESS : JumpPayResult.FAIL);
+          });
+        } else if (Platform.isAndroid) {
+          canLaunch(url).then((can) {
+            if (can) {
+              launch(url);
+            }
+            _payStatus = can ? PayStatus.SUCCESS : PayStatus.FAIL;
+            _jumpPayResultCallback
+                ?.call(can ? JumpPayResult.SUCCESS : JumpPayResult.FAIL);
+          });
+        }
       }
       return NavigationDecision.prevent;
     }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_h5pay/h5pay.dart';
 
@@ -23,11 +25,11 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Center(
         child: H5PayWidget(
-          refererScheme: "http://www.xx",
+          refererScheme: getrefererScheme(),
           builder: (ctx, controller) {
             return FlatButton(
                 onPressed: () {
-                  controller.pay(getPayUrl(), jumpPayResultCallback: (p) {
+                  controller.pay(getAliPayUrl(), jumpPayResultCallback: (p) {
                     print("支付跳转结果$p");
                   });
                 },
@@ -38,8 +40,21 @@ class _MyAppState extends State<MyApp> {
     ));
   }
 
-  ///从服务器上获取支付的h5链接
-  String getPayUrl() {
-    return "http://www.baidu.com";
+  String getrefererScheme() {
+    if (Platform.isAndroid) {
+      return "http://xxx.xxx.com";
+    }
+    if (Platform.isIOS) {
+      return "xxx.xxx.com://";
+    }
+  }
+
+  ///此处为对应平台的支付链接样例,具体从个自服务器上获取支付的h5链接
+  String getAliPayUrl() {
+    return "https://openapi.alipay.com/gateway.do?alipay_sdkxxxxx";
+  }
+
+  String gewWXPayUrl() {
+    return "https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=xxx&package=xxx";
   }
 }
