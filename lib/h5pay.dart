@@ -133,16 +133,17 @@ class _H5PayWidgetState extends State<H5PayWidget> implements H5PayController {
   }
 
   NavigationDecision _navigationDelegate(NavigationRequest request) {
-    String url = Uri.decodeFull(request.url);
+    String url = request.url;
     if (url.startsWith("weixin://") ||
         url.startsWith("alipays://") ||
         url.startsWith("alipay://")) {
       if (Platform.isIOS &&
           (url.startsWith("alipays://") || url.startsWith("alipay://")) &&
           _refererScheme != null) {
+        url = Uri.decodeFull(url);
         url = url.replaceAll(':"alipays', ':"' + _refererScheme);
+        url = Uri.encodeFull(url);
       }
-      url = Uri.encodeFull(url);
 
       if (_isDispose || _payStatus != PayStatus.LOADING) {
       } else {
