@@ -1,4 +1,4 @@
-# Flutter_h5pay
+# Flutter H5Pay
 ### A Flutter plugin for h5pay(Support WeChat and Alipay)
 
 
@@ -46,7 +46,10 @@ H5PayWidget(
 Opt-in to the embedded views preview by adding a boolean property to the app's `Info.plist` file
 with the key `io.flutter.embedded_views_preview` and the value `YES`.
 
+### Notice
 When payment completed or cancelled,on IOS, if need to return to the App,you must add target URL Types into the `Info.plist` file。
+
+
 For exmalpe.If you [referer](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_4 "referer")(申请H5支付时的授权域名) is `http://www.xx.com` ，In Android you can set this referer,but in ios you should set like this `www.xx.com:\\`，and add a URL Schemes of  `www.xx.com` into the `Info.plist` file.Please refer to this [article](https://juejin.im/post/5bc83676e51d450e4369b526 "article") for more details 
 
 
