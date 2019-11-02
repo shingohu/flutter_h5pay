@@ -1,21 +1,14 @@
 # Flutter H5Pay
+
+[![pub package](https://img.shields.io/pub/v/flutter_h5pay.svg)](https://pub.dartlang.org/packages/flutter_h5pay)
 ### A Flutter plugin for h5pay(Support WeChat and Alipay)
-
-
-
-
-
-
-
+  
 ## Usage
 
 Add `flutter_h5pay` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
-For Example
 ```
 dependencies:
-  flutter_h5pay:
-    git:
-      url: https://github.com/shingohu/flutter_h5pay.git
+    flutter_h5pay: ^0.1.0
 ```
 
 ```
@@ -49,8 +42,10 @@ with the key `io.flutter.embedded_views_preview` and the value `YES`.
 ### Notice
 When payment completed or cancelled,on IOS, if need to return to the App,you must add target URL Types into the `Info.plist` file。
 
-
-For exmalpe.If you [referer](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_4 "referer")(申请H5支付时的授权域名) is `http://www.xx.com` ，In Android you can set this referer,but in ios you should set like this `www.xx.com:\\`，and add a URL Schemes of  `www.xx.com` into the `Info.plist` file.Please refer to this [article](https://juejin.im/post/5bc83676e51d450e4369b526 "article") for more details 
+For Exmalpe.
+If you [referer](https://pay.weixin.qq.com/wiki/doc/api/H5.php?chapter=15_4 "referer")(申请H5支付时的授权域名) is `http://www.xx.com` 
+In Android you can set this referer.
+In iOS you should set like this `www.xx.com:\\`，and add a URL Schemes of  `www.xx.com` into the `Info.plist` file.Please refer to this [article](https://juejin.im/post/5bc83676e51d450e4369b526 "article") for more details. 
 
 
 

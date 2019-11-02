@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_h5pay/h5pay.dart';
+import 'package:flutter_h5pay/flutter_h5pay.dart';
 
 void main() => runApp(MyApp());
 

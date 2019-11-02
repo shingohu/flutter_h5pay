@@ -1,6 +1,6 @@
 name: flutter_h5pay
 description: A flutter plugin for h5pay(support WeChat and Alipay).
-version: 0.0.1
+version: 0.1.0
 author: shingohu<shingohu@163.com>
 homepage: https://github.com/shingohu/flutter_h5pay
 
